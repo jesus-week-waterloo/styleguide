@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+<head>
+  <title>Jesus Week Styleguide</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://use.typekit.net/alu1dhv.css" crossorigin="anonymous">
+<style>html { background: 0 0 / 4px 4px linear-gradient(to bottom, #f5f5f7, #f5f5f7 3px, #eef 3px, #eef 4px); font-size: 16px; line-height: 24px; }
+#highlight { max-width: 800px; margin: auto; }
+.cmt { color: #888; }
+.prop { color: darkorange; }
+.baseline-roman { font-family: var(--font-family-roman) }
+.baseline-display { font-family: var(--font-family-display) }
+.color::after { content: '■'; color: var(--color); font-size: 24px; margin-left: .2em; }
+</style>
+  <style id="style">:root {
+  /**
+   * Fonts
+   */
+
+  --font-family-roman: neue-haas-grotesk-text;
+  --font-family-display: neue-haas-grotesk-display;
+
+  /**
+   * Baselines
+   */
+
+  --font-baseline-12: 9.6px 12px;
+  --font-baseline-16: 12.8px 16px;
+  --font-baseline-20: 16px 20px;
+  --font-baseline-24: 19.2px 24px;
+  --font-baseline-28: 22.4px 28px;
+  --font-baseline-36: 28.8px 36px;
+  --font-baseline-44: 35.2px 44px;
+  --font-baseline-48: 40px 48px;
+  --font-baseline-64: 55.7px 64px;
+  --font-baseline-80: 72px 80px;
+
+  /**
+   * Colours
+   */
+
+  --purple-10: #e4ccff;
+  --purple-20: #cc99ff;
+  --purple-30: #ba6bff;
+  --purple-40: #a938ff;
+  --purple-50: #9900ff;
+  --purple-60: #8400d1;
+  --purple-70: #69009e;
+  --purple-80: #4f0070;
+  --purple-90: #2d003d;
+
+  --gold-10: #ffefcc;
+  --gold-20: #ffe299;
+  --gold-30: #ffda6b;
+  --gold-40: #ffd438;
+  --gold-50: #ffd000;
+  --gold-60: #ccad00;
+  --gold-70: #998700;
+  --gold-80: #665d00;
+  --gold-90: #333000;
+
+  --blue-10: #cce2ff;
+  --blue-20: #99c2ff;
+  --blue-30: #6ba1ff;
+  --blue-40: #387aff;
+  --blue-50: #0550ff;
+  --blue-60: #0038d1;
+  --blue-70: #00259e;
+  --blue-80: #001670;
+  --blue-90: #000a3d;
+
+  --grey-10: #e7e6e4;
+  --grey-20: #cfcdc9;
+  --grey-30: #b9b7b1;
+  --grey-40: #a19f97;
+  --grey-50: #868479;
+  --grey-60: #6e6d63;
+  --grey-70: #53524b;
+  --grey-80: #383833;
+  --grey-90: #1d1d1b;
+
+  --white: #fff;
+}</style>
+</head>
+<body>
+  <pre id="highlight"></pre>
+<script>
+  const css = document.getElementById('style');
+  const pre = document.getElementById('highlight');
+
+  pre.innerHTML = css.textContent
+    .replace(/(--font-family-\w+): (.+);/g, `$1: <span class="ff" style="font-family:var($1)">$2</span>;`)
+  .replace(/(--font-baseline-\d+): ([\d.]+px) ([\d.]+px)/g, (match, prop, fs, lh) => `${prop}: <span class="baseline-${parseFloat(fs) < 28 ? 'roman' : 'display'}" style="font-size:${fs};line-height:${lh}">${fs} ${lh}</span>`)
+    .replace(/(--[\w\d-]+): (#[0-9a-f]+)/g, (match, prop, clr) => `${prop}: <span class="color" style="--color:var(${prop})">${clr}</span>`)
+    .replace(/^(\s*)(--[\w\d-]+):/gm, `$1<span class="prop">$2</span>:`)
+    .replace(/\/\*((?:.|\s)+?)\*\//gm, `<span class="cmt">/*$1*/</span>`)
+</script>
+</body>
+</html>
